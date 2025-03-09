@@ -1,14 +1,7 @@
-import { ArrowDown, Award, Clock, CheckCircle } from 'lucide-react';
+import { Award, Clock, CheckCircle } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
 
 const Hero = () => {
-  const scrollToNext = () => {
-    const aboutSection = document.getElementById('about');
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <section 
       id="home" 
@@ -21,6 +14,15 @@ const Hero = () => {
         <div className="absolute top-[30%] -left-[5%] w-[30%] h-[30%] bg-primary/5 rounded-full animate-pulse-soft blur-3xl opacity-60" style={{ animationDelay: '1s' }}></div>
         <div className="absolute top-[20%] right-[15%] w-[25%] h-[25%] bg-primary/5 rounded-full animate-float blur-3xl opacity-50" style={{ animationDelay: '3s' }}></div>
         <div className="absolute bottom-[15%] right-[10%] w-[35%] h-[30%] bg-primary/5 rounded-full animate-pulse-soft blur-3xl opacity-60" style={{ animationDelay: '2.5s' }}></div>
+      </div>
+
+      {/* Hero image */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="/img/paginaprincipal (1).jpg" 
+          alt="Imagen Principal" 
+          className="w-full h-full object-cover opacity-50"
+        />
       </div>
 
       <div className="content-container relative z-10">
@@ -84,15 +86,6 @@ const Hero = () => {
           </AnimatedSection>
         </div>
       </div>
-
-      {/* Scroll down indicator */}
-      <button 
-        onClick={scrollToNext}
-        aria-label="Desplazarse hacia abajo"
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 w-10 h-10 flex items-center justify-center rounded-full border border-border/50 bg-background/50 backdrop-blur hover:bg-background/80 transition-all animate-pulse-soft"
-      >
-        <ArrowDown size={20} />
-      </button>
     </section>
   );
 };

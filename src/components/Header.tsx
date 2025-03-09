@@ -1,11 +1,11 @@
-
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronRight } from "lucide-react";
+import { Menu, X, ChevronRight, Sun, Moon } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -17,6 +17,12 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Check if dark mode is enabled on load
+  useEffect(() => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setIsDarkMode(isDark);
+  }, []);
+
   // Close mobile menu when route changes
   useEffect(() => {
     setIsMenuOpen(false);
@@ -24,6 +30,11 @@ const Header = () => {
 
   const isActive = (path: string) => {
     return location.pathname === path;
+  };
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    document.documentElement.classList.toggle('dark', !isDarkMode);
   };
 
   return (
@@ -36,7 +47,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="text-xl font-bold text-primary">
-            Studio<span className="text-foreground">Web</span>
+            And<span className="text-foreground">Drew</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -59,16 +70,36 @@ const Header = () => {
             >
               Contacto <ChevronRight size={16} className="inline ml-1" />
             </Link>
+            
+            {/* Dark mode switch */}
+            <button 
+              onClick={toggleDarkMode} 
+              className="ml-4 p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
+              aria-label={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+            >
+              {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
           </nav>
 
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden text-foreground p-2 focus:outline-none"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile menu button and dark mode switch for mobile */}
+          <div className="md:hidden flex items-center gap-2">
+            {/* Dark mode switch for mobile */}
+            <button 
+              onClick={toggleDarkMode} 
+              className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
+              aria-label={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+            >
+              {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            
+            <button
+              className="text-foreground p-2 focus:outline-none"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
