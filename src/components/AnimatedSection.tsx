@@ -1,64 +1,62 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 interface AnimatedSectionProps {
   children: React.ReactNode;
-  className?: string;
+  animation?: 'fade-in' | 'fade-in-right' | 'fade-in-left' | 'scale-in' | 'fade-in-down';
   delay?: number;
   threshold?: number;
-  animation?: 'fade-in' | 'fade-in-right' | 'fade-in-left' | 'scale-in';
+  className?: string;
   once?: boolean;
 }
 
 const AnimatedSection = ({
   children,
-  className,
+  animation = 'fade-in',
   delay = 0,
   threshold = 0.1,
-  animation = 'fade-in',
+  className = '',
   once = true,
 }: AnimatedSectionProps) => {
   const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const currentSection = sectionRef.current;
+    
     const observer = new IntersectionObserver(
       ([entry]) => {
+        // Cuando el elemento es visible, establece isVisible a true
         if (entry.isIntersecting) {
           setTimeout(() => {
             setIsVisible(true);
           }, delay);
-          
+          // Si once es true, deja de observar después de que se haya visto
           if (once) {
-            observer.disconnect();
+            observer.unobserve(entry.target);
           }
         } else if (!once) {
+          // Si once es false, hace toggle del estado visible/no visible
           setIsVisible(false);
         }
       },
-      {
-        threshold,
-        rootMargin: '0px 0px -100px 0px',
-      }
+      { threshold }
     );
 
-    const currentRef = ref.current;
-    
-    if (currentRef) {
-      observer.observe(currentRef);
+    if (currentSection) {
+      observer.observe(currentSection);
     }
 
     return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
+      if (currentSection) {
+        observer.unobserve(currentSection);
       }
     };
   }, [delay, threshold, once]);
 
   return (
     <div
-      ref={ref}
+      ref={sectionRef}
       className={cn(
         'transition-all duration-700 ease-out',
         {
@@ -66,10 +64,12 @@ const AnimatedSection = ({
           'opacity-0 translate-x-8': animation === 'fade-in-right' && !isVisible, 
           'opacity-0 -translate-x-8': animation === 'fade-in-left' && !isVisible,
           'opacity-0 scale-95': animation === 'scale-in' && !isVisible,
+          'opacity-0 -translate-y-10': animation === 'fade-in-down' && !isVisible,
           'opacity-100 translate-y-0 translate-x-0 scale-100': isVisible
         },
         className
       )}
+      style={{ willChange: 'opacity, transform' }}
     >
       {children}
     </div>
