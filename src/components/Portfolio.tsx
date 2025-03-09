@@ -94,11 +94,11 @@ const Portfolio = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredItems.map((item, index) => (
             <AnimatedSection key={item.id} delay={index * 100} animation="scale-in">
-              <div className="portfolio-item h-80 rounded-xl overflow-hidden">
+              <div className="portfolio-item group">
                 <img
                   src={item.imageUrl}
                   alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110"
                   loading="lazy"
                 />
                 <div className="portfolio-overlay">

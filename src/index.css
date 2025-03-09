@@ -191,10 +191,15 @@
 
   /* Portfolio item */
   .portfolio-item {
-    @apply relative overflow-hidden rounded-xl shadow-soft group;
+    @apply relative overflow-hidden rounded-xl shadow-soft;
   }
 
   .portfolio-overlay {
-    @apply absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end;
+    @apply absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 transition-opacity duration-300 p-6 flex flex-col justify-end;
+  }
+  
+  /* Add this to ensure the hover effect still works */
+  .group:hover .portfolio-overlay {
+    @apply opacity-100;
   }
 }
