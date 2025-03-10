@@ -76,6 +76,7 @@
   body {
     @apply bg-background text-foreground antialiased overflow-x-hidden selection:bg-primary/10;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+    background-color: hsl(var(--background));
   }
 
   /* Smooth scrolling */
@@ -241,3 +242,63 @@
 .animate-pulse-custom {
   animation: pulse 2s infinite ease-in-out;
 }
+
+@keyframes scrollDown {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  75% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  80% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-scrollDown {
+  animation: scrollDown 1.5s infinite;
+}
+/* Temas de colores */
+:root.theme-red {
+  --background: 0 100% 99%;
+  --primary: 0 80% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 50% 95%;
+  --background-overlay: rgba(255, 230, 230, 0.1);
+}
+
+:root.theme-yellow {
+  --background: 40 100% 99%;
+  --primary: 40 80% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 40 50% 95%;
+  --background-overlay: rgba(255, 250, 230, 0.1);
+}
+
+:root.theme-blue {
+  --background: 210 100% 99%;
+  --primary: 210 80% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 210 50% 95%;
+  --background-overlay: rgba(230, 240, 255, 0.1);
+}
+
+/* Overlay para temas de colores */
+:root.theme-red body::before,
+:root.theme-yellow body::before,
+:root.theme-blue body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--background-overlay);
+  pointer-events: none;
+}
+

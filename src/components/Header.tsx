@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronRight, Sun, Moon } from "lucide-react";
+import { Menu, X, ChevronRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import ThemePrisma from "./ui/theme-prisma";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -17,12 +17,6 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Check if dark mode is enabled on load
-  useEffect(() => {
-    const isDark = document.documentElement.classList.contains('dark');
-    setIsDarkMode(isDark);
-  }, []);
-
   // Close mobile menu when route changes
   useEffect(() => {
     setIsMenuOpen(false);
@@ -30,11 +24,6 @@ const Header = () => {
 
   const isActive = (path: string) => {
     return location.pathname === path;
-  };
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle('dark', !isDarkMode);
   };
 
   return (
@@ -47,7 +36,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="text-xl font-bold text-primary">
-            And<span className="text-foreground">Drew</span>
+            Studio<span className="text-foreground">Web</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -56,7 +45,7 @@ const Header = () => {
               Inicio
             </Link>
             <Link to="/servicios" className={`nav-item ${isActive("/servicios") ? "active" : ""}`}>
-              Servicios
+              CV
             </Link>
             <Link to="/portfolio" className={`nav-item ${isActive("/portfolio") ? "active" : ""}`}>
               Portfolio
@@ -71,26 +60,16 @@ const Header = () => {
               Contacto <ChevronRight size={16} className="inline ml-1" />
             </Link>
             
-            {/* Dark mode switch */}
-            <button 
-              onClick={toggleDarkMode} 
-              className="ml-4 p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
-              aria-label={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-            >
-              {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
+            {/* Selector de tema */}
+            <div className="ml-4">
+              <ThemePrisma />
+            </div>
           </nav>
 
-          {/* Mobile menu button and dark mode switch for mobile */}
+          {/* Mobile menu button and theme selector for mobile */}
           <div className="md:hidden flex items-center gap-2">
-            {/* Dark mode switch for mobile */}
-            <button 
-              onClick={toggleDarkMode} 
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
-              aria-label={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-            >
-              {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
+            {/* Theme selector for mobile */}
+            <ThemePrisma />
             
             <button
               className="text-foreground p-2 focus:outline-none"
@@ -125,7 +104,7 @@ const Header = () => {
               isActive("/servicios") ? "bg-primary/10 text-primary" : "text-foreground"
             }`}
           >
-            Servicios
+            CV
           </Link>
           <Link
             to="/portfolio"

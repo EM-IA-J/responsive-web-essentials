@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ExternalLink, Star, ChevronRight, Quote, FileImage } from 'lucide-react';
+import { ExternalLink, Star, ChevronRight, FileImage } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
 import { Link } from 'react-router-dom';
 import { portfolioItems } from '@/data/portfolioData';
@@ -20,13 +20,7 @@ const PortfolioCard = ({ item }) => (
           className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110"
           loading="lazy"
         />
-        {/* Badge para proyectos con SVG */}
-        {item.svgFiles && (
-          <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs flex items-center shadow-lg">
-            <FileImage size={14} className="mr-1" />
-            Experiencia SVG
-          </div>
-        )}
+       
         <div className="portfolio-overlay">
           <div className="mt-auto">
             <span className="text-sm text-white/70">{item.category}</span>
@@ -48,66 +42,6 @@ const PortfolioCard = ({ item }) => (
     </Link>
   </AnimatedSection>
 );
-
-const TestimonialCard = ({ testimonial }) => (
-  <AnimatedSection animation="fade-in">
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-border/20">
-      <div className="flex gap-1 mb-4 text-amber-400">
-        {[...Array(testimonial.stars)].map((_, i) => (
-          <Star key={i} size={16} fill="currentColor" />
-        ))}
-      </div>
-      <div className="mb-4 relative">
-        <Quote className="absolute -top-2 -left-2 text-primary/10" size={24} />
-        <p className="text-foreground/80 italic relative z-10">{testimonial.text}</p>
-      </div>
-      <div className="flex items-center">
-        <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
-          <img src={testimonial.image} alt={testimonial.name} className="w-full h-full object-cover" />
-        </div>
-        <div>
-          <h4 className="font-semibold">{testimonial.name}</h4>
-          <p className="text-sm text-foreground/60">{testimonial.position}</p>
-        </div>
-      </div>
-    </div>
-  </AnimatedSection>
-);
-
-const testimonials = [
-  {
-    id: 1,
-    text: "El equipo entendió perfectamente nuestras necesidades y entregó un sitio web que superó nuestras expectativas. El diseño es magnífico y la funcionalidad impecable.",
-    name: "Ana Rodríguez",
-    position: "CEO de FashionBrand",
-    stars: 5,
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-  },
-  {
-    id: 2,
-    text: "La colaboración con este estudio ha sido clave para el éxito de nuestro lanzamiento. Su enfoque estratégico y atención al detalle transformó nuestra presencia digital.",
-    name: "Carlos Mendoza",
-    position: "Director de Marketing en TechLaunch",
-    stars: 5,
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-  },
-  {
-    id: 3,
-    text: "Desde que rediseñaron nuestra web, hemos visto un incremento del 40% en conversiones. Su conocimiento en UX y optimización ha sido invaluable para nuestro negocio.",
-    name: "Elena Torres",
-    position: "CMO de ConsultPro",
-    stars: 5,
-    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-  },
-  {
-    id: 4,
-    text: "El proceso de trabajo fue transparente y eficiente. Cumplieron con los plazos y presupuesto acordados, y su soporte post-lanzamiento ha sido excepcional.",
-    name: "Javier Sánchez",
-    position: "CTO de DataViz",
-    stars: 5,
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-  }
-];
 
 const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState("Todos");
@@ -131,19 +65,18 @@ const Portfolio = () => {
     .filter(item => !showSvgProjects || (item.svgFiles && item.svgFiles.length > 0));
 
   return (
-    <section id="portfolio" className="section bg-white py-24">
+    <section id="portfolio" className="section py-24">
       <div className="content-container">
         <AnimatedSection className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-block mb-4 px-3 py-1 bg-primary/10 rounded-full text-sm font-medium text-primary">
-            Nuestro Portfolio
+            Explora mis proyectos
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Proyectos destacados
+            Trabajos creativos
           </h2>
           <p className="text-foreground/70">
-            Una muestra de nuestros trabajos más recientes y representativos, 
-            que reflejan nuestra pasión por el diseño y la innovación.
-            Cada proyecto es único y está diseñado para cumplir objetivos específicos.
+            Una colección de diseños y proyectos que definen mi estilo y pasión por la creatividad.
+            Cada trabajo representa una historia única y una solución personalizada.
           </p>
         </AnimatedSection>
 
@@ -212,7 +145,7 @@ const Portfolio = () => {
         </AnimatedSection>
 
         {/* Portfolio grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredItems.length > 0 ? (
             filteredItems.map((item) => (
               <PortfolioCard 
@@ -236,35 +169,6 @@ const Portfolio = () => {
             </div>
           )}
         </div>
-        
-        {/* Testimonials */}
-        <AnimatedSection className="mb-12">
-          <div className="text-center max-w-3xl mx-auto mb-10">
-            <h3 className="text-2xl font-bold mb-4">Lo que dicen nuestros clientes</h3>
-            <p className="text-foreground/70">
-              Opiniones de quienes han confiado en nosotros para sus proyectos digitales
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {testimonials.map(testimonial => (
-              <TestimonialCard key={testimonial.id} testimonial={testimonial} />
-            ))}
-          </div>
-        </AnimatedSection>
-        
-        {/* CTA */}
-        <AnimatedSection>
-          <div className="bg-gradient-to-r from-primary/80 to-primary rounded-2xl p-8 text-center text-white">
-            <h3 className="text-2xl font-bold mb-4">¿Listo para crear tu próximo proyecto?</h3>
-            <p className="text-white/80 mb-6 max-w-2xl mx-auto">
-              Conversemos sobre cómo podemos ayudarte a alcanzar tus objetivos con una solución digital a medida.
-            </p>
-            <a href="#contact" className="px-6 py-3 bg-white text-primary rounded-full font-medium hover:bg-white/90 transition-colors">
-              Hablemos de tu proyecto
-            </a>
-          </div>
-        </AnimatedSection>
       </div>
     </section>
   );

@@ -2,7 +2,7 @@ export const portfolioItems = [
   {
     id: 1,
     title: "Brillabruja",
-    category: "Diseño Creativo",
+    category: "A",
     tags: ["Ilustración", "Branding", "Identidad"],
     imageUrl: "/img/brillabruja.png",
     link: "#",
@@ -14,7 +14,7 @@ export const portfolioItems = [
     id: 2,
     title: "EdChang",
     category: "Branding corporativo",
-    tags: ["Educación", "Plataforma Digital", "UX/UI"],
+    tags: [ "Identidad de marca", "Branding"],
     imageUrl: "/img/edchang.png",
     link: "#",
     client: "EdChang",
@@ -24,8 +24,8 @@ export const portfolioItems = [
   {
     id: 3,
     title: "M12",
-    category: "Diseño de marca personal interactivo",
-    tags: ["Interactividad", "Digital Art", "Experiencia"],
+    category: "Branding de marca personal",
+    tags: ["Diseño gráfico", "Identidad", "Branding"],
     imageUrl: "/img/m12.png",
     link: "#",
     client: "M12 Interactive",
@@ -35,8 +35,8 @@ export const portfolioItems = [
   {
     id: 4,
     title: "Veracruz",
-    category: "Imagen de Marca",
-    tags: ["React", "Node.js", "MongoDB"],
+    category: "Diseño gráfico",
+    tags: ["Packaging", "Identidad", "Branding"],
     imageUrl: "/img/veracruz.png",
     link: "#",
     client: "FashionBrand",
@@ -45,19 +45,19 @@ export const portfolioItems = [
   {
     id: 5,
     title: "Arenal",
-    category: "Imagen de Marca y branding",
-    tags: ["React", "TypeScript", "Firebase"],
+    category: "Digital",
+    tags: ["Creatividad", "RRSS", "Dirección de arte"],
     imageUrl: "/img/arenal.png",
     link: "#",
-    client: "FinTech Solutions",
+    client: "Arenal",
     description: "Aplicación web para gestión financiera personal con dashboards interactivos y analíticas en tiempo real."
   },
   {
     id: 6,
     title: "Astara",
-    category: "Rebranding y Sitio Web",
-    tags: ["Next.js", "Tailwind CSS", "Strapi CMS"],
-    imageUrl: "img/Ilustración_sin_título 12.png",
+    category: "Digital",
+    tags: ["Creatividad", "RRSS", "Diseño gráfico"],
+    imageUrl: "/img/Ilustración_sin_título 12.png",
     link: "#",
     client: "ConsultPro",
     description: "Sitio web corporativo de alto impacto con sistema de gestión de contenidos personalizado."
@@ -65,8 +65,8 @@ export const portfolioItems = [
   {
     id: 7,
     title: "Florette",
-    category: "Campaña de Marketing",
-    tags: ["Vue.js", "Express", "D3.js"],
+    category: "Digital",
+    tags: ["Creatividad", "RRSS", "Dirección de arte"],
     imageUrl: "/img/florette.png",
     link: "#",
     client: "DataViz",
@@ -75,18 +75,18 @@ export const portfolioItems = [
   {
     id: 8,
     title: "Lidl",
-    category: "Campaña de comunicación",
-    tags: ["HTML5", "CSS3", "JavaScript", "GSAP"],
+    category: "Digital",
+    tags: ["RRSS", "Creatividad", "Ilustración"],
     imageUrl: "/img/lidl.png",
     link: "#",
-    client: "TechLaunch",
+    client: "LidL",
     description: "Landing page de alto rendimiento para el lanzamiento de un producto tecnológico con animaciones avanzadas."
   },
   {
     id: 9,
     title: "Verleal",
-    category: "Branding completo y campaña corporativa",
-    tags: ["Vue.js", "Laravel", "MySQL"],
+    category: "Digital",
+    tags: ["Creatividad", "RRSS", "Dirección de arte"],
     imageUrl: "/img/verleal.png",
     link: "#",
     client: "ProductCatalog",
@@ -95,8 +95,8 @@ export const portfolioItems = [
   {
     id: 10,
     title: "Pickle",
-    category: "Agencia de publicidad",
-    tags: ["Vue.js", "Laravel", "MySQL"],
+    category: "Digital",
+    tags: ["Diseño gráfico", "RRSS", "Branding"],
     imageUrl: "/img/pickle.png",
     link: "#",
     client: "ProductCatalog",
@@ -105,8 +105,8 @@ export const portfolioItems = [
   {
     id: 11,
     title: "Végola",
-    category: "Branding y diseño de marca",
-    tags: ["Vue.js", "Laravel", "MySQL"],
+    category: "Digital",
+    tags: ["Creatividad", "RRSS", "Branding"],
     imageUrl: "/img/vegola.png",
     link: "#",
     client: "ProductCatalog",
@@ -114,42 +114,42 @@ export const portfolioItems = [
   },
   {
     id: 12,
-    title: "Catálogo Digital",
-    category: "Ecommerce",
-    tags: ["Vue.js", "Laravel", "MySQL"],
+    title: "Palabras Intraducibles",
+    category: "Ilustración",
+    tags: ["Creatividad", "Ilustración Digital"],
     imageUrl: "/img/xtreme_grafica2.gif",
     link: "#",
-    client: "ProductCatalog",
-    description: "Catálogo digital interactivo con sistema de búsqueda avanzada y filtros personalizados."
+    client: "Xtreme Sports",
+    description: "Identidad visual dinámica para marca deportiva con enfoque en deportes extremos y experiencias de alta adrenalina."
   },
   {
     id: 13,
-    title: "Catálogo Digital",
-    category: "Ecommerce",
-    tags: ["Vue.js", "Laravel", "MySQL"],
+    title: "Merchandising",
+    category: "Ilustración",
+    tags: ["Creatividad", "Ilustración Digital", "Dirección de Arte"],
     imageUrl: "/img/verleal.png",
     link: "#",
-    client: "ProductCatalog",
-    description: "Catálogo digital interactivo con sistema de búsqueda avanzada y filtros personalizados."
+    client: "Verleal",
+    description: "Campaña publicitaria integral para la expansión de marca con enfoque en nuevos mercados y segmentos de audiencia."
   },
   {
     id: 14,
-    title: "Catálogo Digital",
-    category: "Ecommerce",
-    tags: ["Vue.js", "Laravel", "MySQL"],
-    imageUrl: "/img/verleal.png",
+    title: "Personal Stuff",
+    category: "Ilustración",
+    tags: ["Ilustración digital", "Creatividad"],
+    imageUrl: "/img/img_drew-8.png",
     link: "#",
-    client: "ProductCatalog",
-    description: "Catálogo digital interactivo con sistema de búsqueda avanzada y filtros personalizados."
+    client: "Drew Enterprises",
+    description: "Desarrollo de identidad corporativa completa incluyendo papelería, manual de marca y guía de estilo para comunicación interna y externa."
   },
   {
     id: 15,
-    title: "Catálogo Digital",
-    category: "Ecommerce",
-    tags: ["Vue.js", "Laravel", "MySQL"],
-    imageUrl: "/img/verleal.png",
+    title: "Otros",
+    category: "Desarrollo Web",
+    tags: ["React", "TypeScript", "UI/UX"],
+    imageUrl: "/img/paginaprincipal (1).jpg",
     link: "#",
-    client: "ProductCatalog",
-    description: "Catálogo digital interactivo con sistema de búsqueda avanzada y filtros personalizados."
+    client: "StudioWeb",
+    description: "Portfolio digital responsivo con animaciones sutiles y experiencia de usuario optimizada para mostrar proyectos creativos y trabajos profesionales."
   }
 ]; 
