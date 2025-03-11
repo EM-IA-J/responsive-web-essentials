@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X, ChevronRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import ThemePrisma from "./ui/theme-prisma";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,7 +35,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="text-xl font-bold text-primary">
-            Studio<span className="text-foreground">Web</span>
+            And<span className="text-foreground">Drew</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -50,27 +49,16 @@ const Header = () => {
             <Link to="/portfolio" className={`nav-item ${isActive("/portfolio") ? "active" : ""}`}>
               Portfolio
             </Link>
-            <Link to="/nosotros" className={`nav-item ${isActive("/nosotros") ? "active" : ""}`}>
-              Nosotros
-            </Link>
             <Link
               to="/contacto"
               className="ml-4 bg-primary text-primary-foreground hover:bg-primary/90 py-2 px-4 rounded-full text-sm font-medium transition-colors"
             >
               Contacto <ChevronRight size={16} className="inline ml-1" />
             </Link>
-            
-            {/* Selector de tema */}
-            <div className="ml-4">
-              <ThemePrisma />
-            </div>
           </nav>
 
-          {/* Mobile menu button and theme selector for mobile */}
-          <div className="md:hidden flex items-center gap-2">
-            {/* Theme selector for mobile */}
-            <ThemePrisma />
-            
+          {/* Mobile menu button */}
+          <div className="md:hidden">
             <button
               className="text-foreground p-2 focus:outline-none"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -113,14 +101,6 @@ const Header = () => {
             }`}
           >
             Portfolio
-          </Link>
-          <Link
-            to="/nosotros"
-            className={`text-lg font-medium px-4 py-3 rounded-lg ${
-              isActive("/nosotros") ? "bg-primary/10 text-primary" : "text-foreground"
-            }`}
-          >
-            Nosotros
           </Link>
           <Link
             to="/contacto"

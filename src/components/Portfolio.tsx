@@ -101,7 +101,7 @@ const Portfolio = () => {
         <AnimatedSection className="mb-6">
           <div className="bg-secondary/30 p-4 rounded-xl">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-medium">Filtrar por tecnología:</h3>
+              <h3 className="text-sm font-medium">Filtrar por especialidad:</h3>
               <button 
                 onClick={() => setShowAllTags(!showAllTags)}
                 className="text-primary text-xs font-medium"
@@ -139,7 +139,7 @@ const Portfolio = () => {
               }`}
             >
               <FileImage size={16} className="mr-2" />
-              {showSvgProjects ? "Mostrando solo proyectos SVG" : "Mostrar proyectos SVG"}
+              {showSvgProjects ? "Mostrando todos los proyectos" : "Mostrar todos"}
             </button>
           </div>
         </AnimatedSection>
