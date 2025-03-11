@@ -39,7 +39,7 @@ const ProjectDetailPage = () => {
         if (project.svgFiles && project.svgFiles.length > 0) {
           const loadedSvgs = await Promise.all(
             project.svgFiles.map(async (svgFileName) => {
-              const response = await fetch(`/svg/${svgFileName}`);
+              const response = await fetch(`./svg/${svgFileName}`);
               return await response.text();
             })
           );
