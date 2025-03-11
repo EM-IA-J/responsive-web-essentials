@@ -5,8 +5,8 @@ const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
   const slides = [
-    "/img/paginaprincipal (1).jpg",
-    "/svg/and_drew.svg"
+    "./img/paginaprincipal (1).jpg",
+    "./svg/and_drew.svg"
   ];
 
   const nextSlide = useCallback(() => {
