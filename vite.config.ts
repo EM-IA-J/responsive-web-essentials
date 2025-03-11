@@ -19,5 +19,5 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: '/mi-proyecto/',
+  base: '/responsive-web-essentials/',
 }));
