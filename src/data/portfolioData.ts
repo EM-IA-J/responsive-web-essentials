@@ -4,7 +4,7 @@ export const portfolioItems = [
     title: "Brillabruja",
     category: "Branding",
     tags: ["Ilustración", "Branding", "Identidad"],
-    imageUrl: "/img/brillabruja.png",
+    imageUrl: "brillabruja.png",
     link: "#",
     client: "Brillabruja",
     description: "Diseño creativo e innovador para una marca mágica con personalidad única y atractiva.",
@@ -15,7 +15,7 @@ export const portfolioItems = [
     title: "EdChang",
     category: "Branding",
     tags: [ "Identidad de marca", "Branding"],
-    imageUrl: "/img/edchang.png",
+    imageUrl: "edchang.png",
     link: "#",
     client: "EdChang",
     description: "Plataforma educativa revolucionaria que transforma la forma de aprender y enseñar en entornos digitales.",
@@ -26,7 +26,7 @@ export const portfolioItems = [
     title: "M12",
     category: "Branding",
     tags: ["Diseño gráfico", "Identidad", "Branding"],
-    imageUrl: "/img/m12.png",
+    imageUrl: "m12.png",
     link: "#",
     client: "M12 Interactive",
     description: "Experiencia digital interactiva de vanguardia que redefine la forma de percibir el espacio y el tiempo.",
@@ -37,7 +37,7 @@ export const portfolioItems = [
     title: "Veracruz",
     category: "Diseño gráfico",
     tags: ["Packaging", "Identidad", "Branding"],
-    imageUrl: "/img/veracruz.png",
+    imageUrl: "veracruz.png",
     link: "#",
     client: "FashionBrand",
     description: "Plataforma de comercio electrónico con funcionalidades avanzadas y diseño premium para marca de moda."
@@ -47,7 +47,7 @@ export const portfolioItems = [
     title: "Arenal",
     category: "Digital",
     tags: ["Creatividad", "RRSS", "Dirección de arte"],
-    imageUrl: "/img/arenal.png",
+    imageUrl: "arenal.png",
     link: "#",
     client: "Arenal",
     description: "Aplicación web para gestión financiera personal con dashboards interactivos y analíticas en tiempo real."
@@ -57,7 +57,7 @@ export const portfolioItems = [
     title: "Astara",
     category: "Digital",
     tags: ["Creatividad", "RRSS", "Diseño gráfico"],
-    imageUrl: "/img/Ilustración_sin_título 12.png",
+    imageUrl: "Ilustración_sin_título 12.png",
     link: "#",
     client: "ConsultPro",
     description: "Sitio web corporativo de alto impacto con sistema de gestión de contenidos personalizado."
@@ -67,7 +67,7 @@ export const portfolioItems = [
     title: "Florette",
     category: "Digital",
     tags: ["Creatividad", "RRSS", "Dirección de arte"],
-    imageUrl: "/img/florette.png",
+    imageUrl: "florette.png",
     link: "#",
     client: "DataViz",
     description: "Dashboard para visualización de datos empresariales con gráficos interactivos y reportes personalizables."
@@ -77,7 +77,7 @@ export const portfolioItems = [
     title: "Lidl",
     category: "Digital",
     tags: ["RRSS", "Creatividad", "Ilustración"],
-    imageUrl: "/img/lidl.png",
+    imageUrl: "lidl.png",
     link: "#",
     client: "LidL",
     description: "Landing page de alto rendimiento para el lanzamiento de un producto tecnológico con animaciones avanzadas."
@@ -87,7 +87,7 @@ export const portfolioItems = [
     title: "Verleal",
     category: "Digital",
     tags: ["Creatividad", "RRSS", "Dirección de arte"],
-    imageUrl: "/img/verleal.png",
+    imageUrl: "verleal.png",
     link: "#",
     client: "ProductCatalog",
     description: "Catálogo digital interactivo con sistema de búsqueda avanzada y filtros personalizados."
@@ -97,7 +97,7 @@ export const portfolioItems = [
     title: "Pickle",
     category: "Digital",
     tags: ["Diseño gráfico", "RRSS", "Branding"],
-    imageUrl: "/img/pickle.png",
+    imageUrl: "pickle.png",
     link: "#",
     client: "ProductCatalog",
     description: "Catálogo digital interactivo con sistema de búsqueda avanzada y filtros personalizados."
@@ -107,7 +107,7 @@ export const portfolioItems = [
     title: "Végola",
     category: "Digital",
     tags: ["Creatividad", "RRSS", "Branding"],
-    imageUrl: "/img/vegola.png",
+    imageUrl: "vegola.png",
     link: "#",
     client: "ProductCatalog",
     description: "Catálogo digital interactivo con sistema de búsqueda avanzada y filtros personalizados."
@@ -117,7 +117,7 @@ export const portfolioItems = [
     title: "Palabras Intraducibles",
     category: "Ilustración",
     tags: ["Creatividad", "Ilustración"],
-    imageUrl: "/img/xtreme_grafica2.gif",
+    imageUrl: "xtreme_grafica2.gif",
     link: "#",
     client: "Xtreme Sports",
     description: "Identidad visual dinámica para marca deportiva con enfoque en deportes extremos y experiencias de alta adrenalina."
@@ -127,7 +127,7 @@ export const portfolioItems = [
     title: "Merchandising",
     category: "Ilustración",
     tags: ["Creatividad", "Ilustración", "Dirección de Arte"],
-    imageUrl: "/img/verleal.png",
+    imageUrl: "verleal.png",
     link: "#",
     client: "Verleal",
     description: "Campaña publicitaria integral para la expansión de marca con enfoque en nuevos mercados y segmentos de audiencia."
@@ -137,7 +137,7 @@ export const portfolioItems = [
     title: "Personal Stuff",
     category: "Ilustración",
     tags: ["Ilustración", "Creatividad"],
-    imageUrl: "/img/img_drew-8.png",
+    imageUrl: "img_drew-8.png",
     link: "#",
     client: "Drew Enterprises",
     description: "Desarrollo de identidad corporativa completa incluyendo papelería, manual de marca y guía de estilo para comunicación interna y externa."
@@ -147,7 +147,7 @@ export const portfolioItems = [
     title: "Otros",
     category: "Diseño gráfico",
     tags: ["Creatividad", "Diseño gráfico", "Branding"],
-    imageUrl: "/img/paginaprincipal (1).jpg",
+    imageUrl: "paginaprincipal (1).jpg",
     link: "#",
     client: "StudioWeb",
     description: "Portfolio digital responsivo con animaciones sutiles y experiencia de usuario optimizada para mostrar proyectos creativos y trabajos profesionales."
