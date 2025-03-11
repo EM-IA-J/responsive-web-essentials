@@ -15,7 +15,7 @@ const PortfolioCard = ({ item }) => (
     <Link to={`/portfolio/${item.id}`} className="portfolio-item group block">
       <div className="relative overflow-hidden rounded-xl">
         <img
-          src={item.imageUrl}
+          src={`./img/${item.imageUrl}`}
           alt={item.title}
           className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110"
           loading="lazy"

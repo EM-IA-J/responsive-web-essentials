@@ -138,7 +138,7 @@ const ContactForm = () => {
 const BlogPost = ({ title, date, imageUrl }) => (
   <div className="flex items-start">
     <div className="w-20 h-20 rounded overflow-hidden flex-shrink-0 mr-4">
-      <img src={imageUrl} alt={title} className="w-full h-full object-cover" />
+      <img src={`./img/${imageUrl}`} alt={title} className="w-full h-full object-cover" />
     </div>
     <div>
       <h4 className="font-medium text-primary-foreground hover:text-primary-foreground/80 transition-colors mb-1 line-clamp-2">

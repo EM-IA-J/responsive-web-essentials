@@ -75,7 +75,7 @@ const ProjectCarousel = () => {
             {/* Previous Project (small) */}
             <div className="hidden md:block absolute left-0 w-1/5 h-full opacity-50 transform -translate-x-1/2 z-0">
               <img 
-                src={prevProject.imageUrl} 
+                src={`./img/${prevProject.imageUrl}`} 
                 alt={prevProject.title}
                 className="w-full h-full object-cover"
               />
@@ -85,7 +85,7 @@ const ProjectCarousel = () => {
             {/* Current Project */}
             <div className="w-full h-full relative z-10">
               <img 
-                src={currentProject.imageUrl} 
+                src={`./img/${currentProject.imageUrl}`} 
                 alt={currentProject.title}
                 className="w-full h-full object-cover"
               />
@@ -128,7 +128,7 @@ const ProjectCarousel = () => {
             {/* Next Project (small) */}
             <div className="hidden md:block absolute right-0 w-1/5 h-full opacity-50 transform translate-x-1/2 z-0">
               <img 
-                src={nextProject.imageUrl} 
+                src={`./img/${nextProject.imageUrl}`} 
                 alt={nextProject.title}
                 className="w-full h-full object-cover"
               />
