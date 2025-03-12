@@ -158,45 +158,7 @@ export const portfolioItems = [
     additionalImages: [],
     videos: []
   },
-  {
-    id: 13,
-    title: "Merchandising",
-    category: "Ilustración",
-    tags: ["Creatividad", "Ilustración", "Dirección de Arte"],
-    imageUrl: "verleal.png",
-    link: "#",
-    client: "Verleal",
-    description: "Campaña publicitaria integral para la expansión de marca con enfoque en nuevos mercados y segmentos de audiencia.",
-    svgFiles: [],
-    additionalImages: ["YolySaa_1.jpg"],
-    videos: []
-  },
-  {
-    id: 14,
-    title: "Personal Stuff",
-    category: "Ilustración",
-    tags: ["Ilustración", "Creatividad"],
-    imageUrl: "img_drew-8.png",
-    link: "#",
-    client: "Drew Enterprises",
-    description: "Desarrollo de identidad corporativa completa incluyendo papelería, manual de marca y guía de estilo para comunicación interna y externa.",
-    svgFiles: [],
-    additionalImages: [],
-    videos: []
-  },
-  {
-    id: 15,
-    title: "Otros",
-    category: "Diseño gráfico",
-    tags: ["Creatividad", "Diseño gráfico", "Branding"],
-    imageUrl: "paginaprincipal (1).jpg",
-    link: "#",
-    client: "StudioWeb",
-    description: "Portfolio digital responsivo con animaciones sutiles y experiencia de usuario optimizada para mostrar proyectos creativos y trabajos profesionales.",
-    svgFiles: [],
-    additionalImages: [],
-    videos: []
-  }
+  
 ]; 
 
 // Definición de tipos para los items del portfolio
