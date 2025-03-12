@@ -1,0 +1,52 @@
+/* Solución específica para SVGs de hero section */
+
+/* Aplicar todos estos estilos con la máxima prioridad */
+body {
+  overflow-x: hidden !important;
+}
+
+/* El contenedor principal del hero */
+#home {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  position: relative !important;
+  margin-bottom: 0 !important; /* Evitar espacio extra abajo */
+  padding-bottom: 0 !important;
+}
+
+/* Contenedor del carousel */
+#home > div.absolute.inset-0.z-0 {
+  width: 100% !important;
+  overflow: hidden !important;
+  position: absolute !important;
+}
+
+/* Aplicar zoom específicamente a las imágenes SVG */
+#home img {
+  transform: scale(1.35) !important;
+  transform-origin: center center !important;
+  
+  /* Asegurar que la imagen se mantiene centrada y contenida */
+  object-fit: contain !important;
+  object-position: center !important;
+  
+  /* Dimensiones */
+  width: 100% !important;
+  height: 100% !important;
+  
+  /* Transición suave */
+  transition: transform 0.3s ease !important;
+}
+
+/* Eliminar espacios adicionales en cualquier sección después del hero */
+#home + section {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Restaurar tamaño normal en pantallas grandes */
+@media (min-width: 1024px) {
+  #home img {
+    transform: scale(1) !important;
+  }
+}

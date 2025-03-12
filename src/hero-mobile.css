@@ -1,0 +1,30 @@
+/* Estilos para SVGs de la hero section en dispositivos móviles y tablets */
+
+/* Asegurar que no haya overflow en los contenedores */
+#home {
+  overflow: hidden !important;
+}
+
+#home .absolute.inset-0.z-0 {
+  overflow: hidden !important;
+}
+
+#home .relative.w-full.h-full {
+  overflow: hidden !important;
+}
+
+/* Asegurar que las imágenes se amplíen desde el centro */
+#home img {
+  transform: scale(1.25) !important;
+  transform-origin: center center !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  transition: transform 0.5s ease !important;
+}
+
+/* Tamaño normal en pantallas grandes */
+@media (min-width: 1024px) {
+  #home img {
+    transform: scale(1) !important;
+  }
+}

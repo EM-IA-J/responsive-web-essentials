@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import './Hero.css'; // Importar archivo CSS consolidado
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -76,7 +77,7 @@ const Hero = () => {
               <img 
                 src={slide} 
                 alt={`Imagen ${index + 1}`} 
-                className={`w-full h-full object-contain`}
+                className="w-full h-full object-contain scale-125 md:scale-125 lg:scale-100 transition-transform duration-500"
               />
             </div>
           ))}

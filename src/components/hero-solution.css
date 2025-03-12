@@ -1,0 +1,94 @@
+/* Solución completa para SVGs en hero section */
+
+/* Prevenir scroll horizontal y eliminar espacios no deseados */
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Contenedor principal del hero */
+section#home {
+  overflow: hidden !important;
+  position: relative !important;
+  min-height: 55vh !important; /* Reducido significativamente */
+  max-height: 75vh !important; /* Reducido significativamente */
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Asegurar que no hay espacio vertical adicional */
+section#home::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Contenedor de imágenes SVG */
+section#home .absolute.inset-0.z-0 {
+  position: absolute !important;
+  inset: 0 !important;
+  overflow: hidden !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Contenedor de slides */
+section#home .relative.w-full.h-full {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Cada slide individual */
+section#home .absolute.inset-0.transition-all {
+  position: absolute !important;
+  inset: 0 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Imágenes SVG */
+section#home img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  transform: scale(1.55) !important; /* Ampliar imagen en móvil aún más */
+  transform-origin: center center !important;
+  transition: transform 0.3s ease !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Sección después del hero - añadir un pequeño espacio para suavizar la transición */
+section#home + section {
+  margin-top: 1.5rem !important;
+  padding-top: 0 !important;
+}
+
+/* Tamaño para tablet */
+@media (min-width: 640px) and (max-width: 1023px) {
+  section#home {
+    min-height: 80vh !important;
+    max-height: 80vh !important;
+  }
+  
+  section#home img {
+    transform: scale(1.4) !important;
+  }
+}
+
+/* Tamaño normal en pantallas grandes */
+@media (min-width: 1024px) {
+  section#home {
+    min-height: 85vh !important;
+    max-height: 85vh !important;
+  }
+  
+  section#home img {
+    transform: scale(1) !important;
+  }
+}

@@ -17,7 +17,7 @@ const PortfolioCard = ({ item }: { item: PortfolioItem }) => (
         <img
           src={`./img/${item.imageUrl}`}
           alt={item.title}
-          className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110"
+          className="w-full h-80 object-contain transition-transform duration-500 group-hover:scale-110"
           loading="lazy"
         />
        
