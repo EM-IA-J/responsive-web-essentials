@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { ExternalLink, Star, ChevronRight, FileImage } from 'lucide-react';
+import { ExternalLink, Star, ChevronRight, FileImage, Video, Images } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
 import { Link } from 'react-router-dom';
-import { portfolioItems } from '@/data/portfolioData';
+import { portfolioItems, PortfolioItem } from '@/data/portfolioData';
 
 // Todas las categorías únicas de los items
 const categories = ["Todos", ...Array.from(new Set(portfolioItems.map(item => item.category)))];
@@ -10,7 +10,7 @@ const categories = ["Todos", ...Array.from(new Set(portfolioItems.map(item => it
 // Todas las etiquetas únicas
 const allTags = Array.from(new Set(portfolioItems.flatMap(item => item.tags)));
 
-const PortfolioCard = ({ item }) => (
+const PortfolioCard = ({ item }: { item: PortfolioItem }) => (
   <AnimatedSection animation="scale-in">
     <Link to={`/portfolio/${item.id}`} className="portfolio-item group block">
       <div className="relative overflow-hidden rounded-xl">
@@ -33,8 +33,28 @@ const PortfolioCard = ({ item }) => (
                 </span>
               ))}
             </div>
+            
+            {/* Indicadores de contenido multimedia */}
+            <div className="flex gap-2 mb-3">
+              {item.svgFiles && item.svgFiles.length > 0 && (
+                <span className="inline-flex items-center text-white bg-white/20 px-2 py-1 rounded-full text-xs backdrop-blur-sm">
+                  <FileImage size={12} className="mr-1" /> {item.svgFiles.length}
+                </span>
+              )}
+              {item.videos && item.videos.length > 0 && (
+                <span className="inline-flex items-center text-white bg-white/20 px-2 py-1 rounded-full text-xs backdrop-blur-sm">
+                  <Video size={12} className="mr-1" /> {item.videos.length}
+                </span>
+              )}
+              {item.additionalImages && item.additionalImages.length > 0 && (
+                <span className="inline-flex items-center text-white bg-white/20 px-2 py-1 rounded-full text-xs backdrop-blur-sm">
+                  <Images size={12} className="mr-1" /> {item.additionalImages.length}
+                </span>
+              )}
+            </div>
+            
             <span className="inline-flex items-center text-white hover:text-primary-foreground transition-colors text-sm">
-              {item.svgFiles ? "Ver experiencia SVG" : "Ver detalles"} <ChevronRight size={14} className="ml-1" />
+              {hasMultimediaContent(item) ? "Ver experiencia completa" : "Ver detalles"} <ChevronRight size={14} className="ml-1" />
             </span>
           </div>
         </div>
@@ -43,15 +63,24 @@ const PortfolioCard = ({ item }) => (
   </AnimatedSection>
 );
 
+// Función auxiliar para verificar si un proyecto tiene contenido multimedia
+const hasMultimediaContent = (item: PortfolioItem): boolean => {
+  return (
+    (item.svgFiles && item.svgFiles.length > 0) ||
+    (item.videos && item.videos.length > 0) ||
+    (item.additionalImages && item.additionalImages.length > 0)
+  );
+};
+
 const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState("Todos");
-  const [activeTags, setActiveTags] = useState([]);
+  const [activeTags, setActiveTags] = useState<string[]>([]);
   const [showAllTags, setShowAllTags] = useState(false);
-  const [showSvgProjects, setShowSvgProjects] = useState(false);
+  const [showMultimediaProjects, setShowMultimediaProjects] = useState(false);
   
   const displayedTags = showAllTags ? allTags : allTags.slice(0, 6);
 
-  const handleTagToggle = (tag) => {
+  const handleTagToggle = (tag: string) => {
     setActiveTags(prev => 
       prev.includes(tag) 
         ? prev.filter(t => t !== tag) 
@@ -62,7 +91,7 @@ const Portfolio = () => {
   const filteredItems = portfolioItems
     .filter(item => activeCategory === "Todos" || item.category === activeCategory)
     .filter(item => activeTags.length === 0 || activeTags.some(tag => item.tags.includes(tag)))
-    .filter(item => !showSvgProjects || (item.svgFiles && item.svgFiles.length > 0));
+    .filter(item => !showMultimediaProjects || hasMultimediaContent(item));
 
   return (
     <section id="portfolio" className="section py-24">
@@ -127,19 +156,19 @@ const Portfolio = () => {
           </div>
         </AnimatedSection>
         
-        {/* SVG Projects Toggle */}
+        {/* Multimedia Projects Toggle */}
         <AnimatedSection className="mb-12">
           <div className="flex justify-center">
             <button
-              onClick={() => setShowSvgProjects(!showSvgProjects)}
+              onClick={() => setShowMultimediaProjects(!showMultimediaProjects)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center ${
-                showSvgProjects
+                showMultimediaProjects
                   ? "bg-primary text-primary-foreground"
                   : "bg-secondary/70 text-foreground/70 hover:bg-secondary"
               }`}
             >
               <FileImage size={16} className="mr-2" />
-              {showSvgProjects ? "Mostrando todos los proyectos" : "Mostrar todos"}
+              {showMultimediaProjects ? "Mostrando proyectos multimedia" : "Mostrar todos"}
             </button>
           </div>
         </AnimatedSection>
@@ -160,7 +189,7 @@ const Portfolio = () => {
                 onClick={() => {
                   setActiveCategory("Todos");
                   setActiveTags([]);
-                  setShowSvgProjects(false);
+                  setShowMultimediaProjects(false);
                 }}
                 className="mt-4 px-4 py-2 bg-primary text-primary-foreground rounded-full text-sm"
               >

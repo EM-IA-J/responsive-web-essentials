@@ -1,75 +1,120 @@
 import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
-import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, Image, Video, FileImage } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
-import { portfolioItems } from '@/data/portfolioData';
+import { portfolioItems, PortfolioItem } from '@/data/portfolioData';
+
+// Enumeración para los tipos de contenido multimedia
+enum MediaType {
+  SVG = 'svg',
+  IMAGE = 'image',
+  VIDEO = 'video'
+}
+
+// Tipo para los elementos multimedia
+interface MediaItem {
+  type: MediaType;
+  src: string;
+  content?: string; // Para SVGs que se cargan como texto
+}
 
 const ProjectDetailPage = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
-  const [project, setProject] = useState(null);
+  const [project, setProject] = useState<PortfolioItem | null>(null);
   const [loading, setLoading] = useState(true);
-  const [svgContents, setSvgContents] = useState([]);
-  const [hasSvgError, setHasSvgError] = useState(false);
-  const [currentSvgIndex, setCurrentSvgIndex] = useState(0);
+  const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
+  const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
   const [showControls, setShowControls] = useState(true);
-  const containerRef = useRef(null);
+  const [loadError, setLoadError] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Timer para ocultar los controles
-  let hideControlsTimer = null;
+  let hideControlsTimer: NodeJS.Timeout | null = null;
 
   // Obtener los datos del proyecto
   useEffect(() => {
     setLoading(true);
     const foundProject = portfolioItems.find(item => item.id.toString() === projectId);
     setProject(foundProject || null);
-    setSvgContents([]);
-    setCurrentSvgIndex(0);
+    setMediaItems([]);
+    setCurrentMediaIndex(0);
+    setLoadError(false);
     setLoading(false);
   }, [projectId]);
 
-  // Cargar todos los SVGs del proyecto
+  // Cargar todos los elementos multimedia del proyecto
   useEffect(() => {
     if (!project) return;
 
-    const loadAllSvgs = async () => {
+    const loadAllMedia = async () => {
       try {
-        // Si el proyecto tiene archivos SVG específicos
+        const mediaCollection: MediaItem[] = [];
+        
+        // Cargar SVGs
         if (project.svgFiles && project.svgFiles.length > 0) {
           const loadedSvgs = await Promise.all(
             project.svgFiles.map(async (svgFileName) => {
-              const response = await fetch(`./svg/${svgFileName}`);
-              return await response.text();
+              try {
+                const response = await fetch(`./svg/${svgFileName}`);
+                const svgContent = await response.text();
+                return {
+                  type: MediaType.SVG,
+                  src: `./svg/${svgFileName}`,
+                  content: svgContent
+                };
+              } catch (error) {
+                console.error(`Error al cargar SVG ${svgFileName}:`, error);
+                return null;
+              }
             })
           );
           
-          setSvgContents(loadedSvgs);
-          setHasSvgError(false);
-        } else {
-          // Si no hay archivos SVG específicos, mostrar un mensaje de error
-          setHasSvgError(true);
+          // Filtrar los SVGs que se cargaron correctamente
+          mediaCollection.push(...loadedSvgs.filter(svg => svg !== null) as MediaItem[]);
         }
+        
+        // Añadir imágenes adicionales
+        if (project.additionalImages && project.additionalImages.length > 0) {
+          const imageItems = project.additionalImages.map(imageName => ({
+            type: MediaType.IMAGE,
+            src: `./img/${imageName}`
+          }));
+          mediaCollection.push(...imageItems);
+        }
+        
+        // Añadir videos
+        if (project.videos && project.videos.length > 0) {
+          const videoItems = project.videos.map(videoName => ({
+            type: MediaType.VIDEO,
+            src: `./videos/${videoName}`
+          }));
+          mediaCollection.push(...videoItems);
+        }
+        
+        setMediaItems(mediaCollection);
+        setLoadError(mediaCollection.length === 0);
       } catch (error) {
-        console.error('Error al cargar los SVGs:', error);
-        setHasSvgError(true);
+        console.error('Error al cargar los elementos multimedia:', error);
+        setLoadError(true);
       }
     };
 
-    loadAllSvgs();
+    loadAllMedia();
   }, [project]);
 
-  // Función para navegar al SVG anterior
-  const goToPreviousSvg = () => {
-    if (currentSvgIndex > 0) {
-      setCurrentSvgIndex(currentSvgIndex - 1);
+  // Función para navegar al elemento multimedia anterior
+  const goToPreviousMedia = () => {
+    if (currentMediaIndex > 0) {
+      setCurrentMediaIndex(currentMediaIndex - 1);
     }
   };
 
-  // Función para navegar al SVG siguiente
-  const goToNextSvg = () => {
-    if (svgContents.length > 0 && currentSvgIndex < svgContents.length - 1) {
-      setCurrentSvgIndex(currentSvgIndex + 1);
+  // Función para navegar al elemento multimedia siguiente
+  const goToNextMedia = () => {
+    if (mediaItems.length > 0 && currentMediaIndex < mediaItems.length - 1) {
+      setCurrentMediaIndex(currentMediaIndex + 1);
     }
   };
 
@@ -111,11 +156,11 @@ const ProjectDetailPage = () => {
 
   // Añadir listeners de teclado para navegación con flechas
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') {
-        goToNextSvg();
+        goToNextMedia();
       } else if (e.key === 'ArrowLeft') {
-        goToPreviousSvg();
+        goToPreviousMedia();
       }
     };
     
@@ -124,7 +169,79 @@ const ProjectDetailPage = () => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [currentSvgIndex, svgContents.length]);
+  }, [currentMediaIndex, mediaItems.length]);
+
+  // Renderizar el elemento multimedia actual
+  const renderCurrentMedia = () => {
+    if (mediaItems.length === 0 || loadError) {
+      return (
+        <div className="w-full h-screen flex items-center justify-center text-white">
+          <p className="text-xl">No se pudo cargar el contenido multimedia para este proyecto.</p>
+        </div>
+      );
+    }
+
+    const currentMedia = mediaItems[currentMediaIndex];
+    
+    switch (currentMedia.type) {
+      case MediaType.SVG:
+        return (
+          <div 
+            className="h-screen w-full"
+            dangerouslySetInnerHTML={{ __html: currentMedia.content || '' }}
+          />
+        );
+      
+      case MediaType.IMAGE:
+        return (
+          <div className="h-screen w-full flex items-center justify-center bg-black">
+            <img 
+              src={currentMedia.src} 
+              alt={project?.title} 
+              className="max-h-full max-w-full object-contain"
+            />
+          </div>
+        );
+      
+      case MediaType.VIDEO:
+        return (
+          <div className="h-screen w-full flex items-center justify-center bg-black">
+            <video 
+              src={currentMedia.src} 
+              controls 
+              autoPlay 
+              className="max-h-full max-w-full"
+            >
+              Tu navegador no soporta la reproducción de videos.
+            </video>
+          </div>
+        );
+      
+      default:
+        return (
+          <div className="w-full h-screen flex items-center justify-center text-white">
+            <p className="text-xl">Tipo de contenido no soportado.</p>
+          </div>
+        );
+    }
+  };
+
+  // Obtener el ícono correspondiente al tipo de medio actual
+  const getCurrentMediaTypeIcon = () => {
+    if (mediaItems.length === 0) return null;
+    
+    const currentMedia = mediaItems[currentMediaIndex];
+    switch (currentMedia.type) {
+      case MediaType.SVG:
+        return <FileImage size={16} className="mr-1" />;
+      case MediaType.IMAGE:
+        return <Image size={16} className="mr-1" />;
+      case MediaType.VIDEO:
+        return <Video size={16} className="mr-1" />;
+      default:
+        return null;
+    }
+  };
 
   if (loading) {
     return (
@@ -161,19 +278,8 @@ const ProjectDetailPage = () => {
         ref={containerRef}
         className="flex-1 bg-black relative no-scrollbar"
       >
-        {/* Mostrar SVG actual */}
-        {hasSvgError ? (
-          <div className="w-full h-screen flex items-center justify-center text-white">
-            <p className="text-xl">No se pudo cargar el SVG para este proyecto.</p>
-          </div>
-        ) : (
-          svgContents.length > 0 && (
-            <div 
-              className="h-screen w-full"
-              dangerouslySetInnerHTML={{ __html: svgContents[currentSvgIndex] }}
-            />
-          )
-        )}
+        {/* Mostrar el elemento multimedia actual */}
+        {renderCurrentMedia()}
         
         {/* Overlay con información del proyecto - visible según showControls */}
         <div 
@@ -204,39 +310,40 @@ const ProjectDetailPage = () => {
                 </button>
               </div>
               
-              {project.svgFiles && project.svgFiles.length > 1 && (
-                <p className="text-white/60 text-sm mt-2">
-                  Usa las flechas para navegar entre SVGs
-                  <span className="ml-2">({currentSvgIndex + 1}/{project.svgFiles.length})</span>
+              {mediaItems.length > 1 && (
+                <p className="text-white/60 text-sm mt-2 flex items-center">
+                  {getCurrentMediaTypeIcon()}
+                  Usa las flechas para navegar entre elementos
+                  <span className="ml-2">({currentMediaIndex + 1}/{mediaItems.length})</span>
                 </p>
               )}
             </AnimatedSection>
           </div>
         </div>
         
-        {/* Botones de navegación entre SVGs */}
-        {project.svgFiles && project.svgFiles.length > 1 && (
+        {/* Botones de navegación entre elementos multimedia */}
+        {mediaItems.length > 1 && (
           <div 
             className="fixed inset-0 pointer-events-none z-10 transition-opacity duration-500"
             style={{ opacity: showControls ? 1 : 0 }}
           >
             {/* Botón anterior */}
-            {currentSvgIndex > 0 && (
+            {currentMediaIndex > 0 && (
               <button
-                onClick={goToPreviousSvg}
+                onClick={goToPreviousMedia}
                 className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/50 transition-colors pointer-events-auto"
-                aria-label="SVG anterior"
+                aria-label="Elemento anterior"
               >
                 <ChevronLeft size={24} />
               </button>
             )}
             
             {/* Botón siguiente */}
-            {currentSvgIndex < svgContents.length - 1 && (
+            {currentMediaIndex < mediaItems.length - 1 && (
               <button
-                onClick={goToNextSvg}
+                onClick={goToNextMedia}
                 className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/50 transition-colors pointer-events-auto"
-                aria-label="Siguiente SVG"
+                aria-label="Siguiente elemento"
               >
                 <ChevronRight size={24} />
               </button>
@@ -248,4 +355,4 @@ const ProjectDetailPage = () => {
   );
 };
 
-export default ProjectDetailPage; 
+export default ProjectDetailPage;

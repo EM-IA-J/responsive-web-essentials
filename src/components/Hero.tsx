@@ -5,7 +5,7 @@ const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
   const slides = [
-    "./img/paginaprincipal (1).jpg",
+    "./svg/and_drew_3.svg",
     "./svg/and_drew.svg"
   ];
 
@@ -70,13 +70,13 @@ const Hero = () => {
               className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
                 currentSlide === index 
                   ? 'opacity-100 scale-100' 
-                  : 'opacity-0 scale-105'
+                  : 'opacity-0 scale-100'
               }`}
             >
               <img 
                 src={slide} 
                 alt={`Imagen ${index + 1}`} 
-                className={`w-full h-full ${index === 0 ? 'object-cover opacity-100' : 'object-contain'}`}
+                className={`w-full h-full object-contain`}
               />
             </div>
           ))}
